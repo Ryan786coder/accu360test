@@ -1,6 +1,10 @@
 FROM ubuntu
-RUN sudo apt update && sudo apt install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git && sudo curl --silent --location https://deb.nodesource.com/setup_8.x | sudo bash -
-RUN sudo apt-get install gcc g++ make && sudo apt-get install -y nodejs redis-server && sudo npm install -g yarn
+RUN sudo apt update 
+RUN sudo apt install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
+RUN sudo curl --silent --location https://deb.nodesource.com/setup_8.x | sudo bash -
+RUN sudo apt-get install gcc g++ make 
+RUN sudo apt-get install -y nodejs redis-server 
+RUN sudo npm install -g yarn
 RUN sudo apt install nginx
 RUN sudo systemctl stop nginx.service
 RUN sudo systemctl start nginx.service
