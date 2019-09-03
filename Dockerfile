@@ -1,7 +1,7 @@
 FROM ubuntu
-RUN apt update expect
-RUN apt install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git expect
-RUN curl --silent --location https://deb.nodesource.com/setup_8.x | sudo bash - expect
+RUN apt update 
+RUN apt install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
+RUN curl --silent --location https://deb.nodesource.com/setup_8.x | sudo bash - 
 RUN apt-get install gcc g++ make 
 RUN apt-get install -y nodejs redis-server 
 RUN npm install -g yarn
