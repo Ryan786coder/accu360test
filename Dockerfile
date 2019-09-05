@@ -1,6 +1,6 @@
 FROM ubuntu
 RUN apt update 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration
 RUN apt install -y libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | sudo bash - 
 RUN apt-get install -y gcc g++ make 
