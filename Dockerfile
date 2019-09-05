@@ -5,11 +5,11 @@ RUN curl --silent --location https://deb.nodesource.com/setup_8.x | sudo bash -
 RUN apt-get install -y gcc g++ make 
 RUN apt-get install -y nodejs redis-server 
 RUN npm install -g yarn
-RUN apt install nginx
+RUN apt install -y nginx
 RUN systemctl stop nginx.service
 RUN systemctl start nginx.service
 RUN systemctl enable nginx.service
-RUN apt-get install mariadb-server mariadb-client
+RUN apt-get install -y mariadb-server mariadb-client
 RUN systemctl stop mariadb.service
 RUN systemctl start mariadb.service
 RUN systemctl enable mariadb.service
