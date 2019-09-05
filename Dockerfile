@@ -7,20 +7,14 @@ RUN apt-get install -y gcc g++ make
 RUN apt-get install -y nodejs redis-server 
 RUN npm install -g yarn
 RUN apt install -y nginx
-RUN systemctl stop nginx.service
-RUN systemctl start nginx.service
-RUN systemctl enable nginx.service
 RUN apt-get install -y mariadb-server mariadb-client
-RUN systemctl stop mariadb.service
-RUN systemctl start mariadb.service
-RUN systemctl enable mariadb.service
 RUN mysql_secure_installation
 RUN mysql -u root -p 
-RUN CREATE DATABASE erpnext;
-RUN CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';
-RUN GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;
-RUN FLUSH PRIVILEGES;
-RUN EXIT;
+RUN CREATE DATABASE erpnext
+RUN CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234'
+RUN GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION
+RUN FLUSH PRIVILEGES
+RUN EXIT
 RUN useradd -m -s /bin/bash erpnextuser
 RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
