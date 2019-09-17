@@ -1,20 +1,28 @@
-FROM ubuntu
-RUN apt update 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration
-RUN apt install -y libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
-RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash - 
-RUN apt-get install -y gcc g++ make 
-RUN apt-get install -y nodejs redis-server 
+FROM debian:9.6-slim
+
+RUN apt-get -y update
+RUN apt -y install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git
+RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get -y install gcc g++ make
+RUN apt-get install -y nodejs redis-server
 RUN npm install -g yarn
 RUN apt install -y nginx
+RUN systemctl stop nginx.service
+RUN systemctl start nginx.service
+RUN systemctl enable nginx.service
 RUN apt-get install -y mariadb-server mariadb-client
-RUN mysql_secure_installation
-RUN mysql -u root -p 
-RUN CREATE DATABASE erpnext
-RUN CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234'
-RUN GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION
-RUN FLUSH PRIVILEGES
-RUN EXIT
+RUN systemctl stop mariadb.service
+RUN systemctl start mariadb.service
+RUN systemctl enable mariadb.service
+
+COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+RUN sudo service mysql start \
+   && mysql --user="root" --execute="CREATE DATABASE erpnext;" \
+   && mysql --user="root" --execute="CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';"
+   && mysql --user="root" --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;"
+   && mysql --user="root" --execute="FLUSH PRIVILEGES"
+   
 RUN useradd -m -s /bin/bash erpnextuser
 RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
@@ -28,10 +36,9 @@ RUN bench init erpnext && cd erpnext
 RUN bench new-site example.com
 RUN bench start
 
-EXPOSE 80
-
-
-
+EXPOSE 8000-8005 9000-9005 3306-3307
+   
+   
 
 
 
