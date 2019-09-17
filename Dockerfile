@@ -19,8 +19,8 @@ COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN sudo service mysql start \
    && mysql --user="root" --execute="CREATE DATABASE erpnext;" \
-   && mysql --user="root" --execute="CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';"
-   && mysql --user="root" --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;"
+   && mysql --user="root" --execute="CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';" \
+   && mysql --user="root" --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;" \
    && mysql --user="root" --execute="FLUSH PRIVILEGES"
    
 RUN useradd -m -s /bin/bash erpnextuser
