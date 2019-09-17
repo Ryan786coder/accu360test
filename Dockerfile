@@ -17,7 +17,8 @@ RUN service mysql start \
    && mysql --user="root" --execute="CREATE DATABASE erpnext;" \
    && mysql --user="root" --execute="CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';" \
    && mysql --user="root" --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;" \
-   && mysql --user="root" --execute="FLUSH PRIVILEGES;"
+   && mysql --user="root" --execute="FLUSH PRIVILEGES;" \
+   && mysql --user="root" --execute="EXIT;"
    
 RUN useradd -m -s /bin/bash erpnextuser
 #RUN passwd erpnextuser
@@ -28,7 +29,8 @@ RUN su - erpnextuser
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
-RUN bench init erpnext && cd erpnext
+RUN bench init erpnext \
+&& cd erpnext
 RUN bench new-site example.com
 RUN bench start
 
