@@ -20,7 +20,7 @@ RUN service mysql start \
    && mysql --user="root" --execute="FLUSH PRIVILEGES;"
    
 RUN useradd -m -s /bin/bash erpnextuser
-RUN passwd erpnextuser
+#RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
