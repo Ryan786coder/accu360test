@@ -7,13 +7,9 @@ RUN apt-get -y install gcc g++ make
 RUN apt-get install -y nodejs redis-server
 RUN npm install -g yarn
 RUN apt install -y nginx
-RUN systemctl stop nginx.service
-RUN systemctl start nginx.service
-RUN systemctl enable nginx.service
+
 RUN apt-get install -y mariadb-server mariadb-client
-RUN systemctl stop mariadb.service
-RUN systemctl start mariadb.service
-RUN systemctl enable mariadb.service
+
 
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
