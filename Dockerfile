@@ -19,6 +19,12 @@ RUN service mysql start \
    && mysql --user="root" --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;" \
    && mysql --user="root" --execute="FLUSH PRIVILEGES;" \
    && mysql --user="root" --execute="\q;"
+   
+RUN service mysql start \
+   && mysql --user="root" --execute="use mysql;" \
+   && mysql --user="root" --execute="update user set plugin="" where user='root';" \
+   && mysql --user="root" --execute="flush privileges;" \
+   && mysql --user="root" --execute="\q;"
 
 
   
