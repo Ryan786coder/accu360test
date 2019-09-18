@@ -20,12 +20,6 @@ RUN service mysql start \
    && mysql --user="root" --execute="FLUSH PRIVILEGES;" \
    && mysql --user="root" --execute="\q;"
    
-RUN service mysql start \
-   && mysql --user="root" --execute="USE mysql;" \
-   && mysql --user="root" --execute="UPDATE user SET plugin="" WHERE user='root';" \
-   && mysql --user="root" --execute="FLUSH PRIVILEGES;" \
-   && mysql --user="root" --execute="\q;"
-
 
   
    
@@ -38,7 +32,7 @@ RUN su - erpnextuser
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
-RUN bench init erpnext \
+RUN erpnextuser sudo bench init erpnext \
 && cd erpnext
 RUN bench new-site example.com
 RUN bench start
