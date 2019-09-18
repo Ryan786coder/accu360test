@@ -24,7 +24,7 @@ RUN service mysql start \
   
    
 RUN useradd -m -s /bin/bash erpnextuser
-RUN passwd erpnextuser
+#RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
