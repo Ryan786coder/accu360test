@@ -23,7 +23,7 @@ RUN service mysql stop
   
    
 RUN useradd -m -s /bin/bash erpnextuser
-#RUN passwd erpnextuser
+RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
@@ -31,7 +31,7 @@ RUN su - erpnextuser
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
-RUN sudo bench init erpnext \
+RUN bench init erpnext \
 && cd erpnext
 RUN bench new-site example.com
 RUN bench start
