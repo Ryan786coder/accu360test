@@ -21,9 +21,9 @@ RUN service mysql start \
    && mysql --user="root" --execute="\q;"
    
 RUN service mysql start \
-   && mysql --user="root" --execute="use mysql;" \
-   && mysql --user="root" --execute="update user set plugin="" where user='root';" \
-   && mysql --user="root" --execute="flush privileges;" \
+   && mysql --user="root" --execute="USE mysql;" \
+   && mysql --user="root" --execute="UPDATE user SET plugin="" WHERE user='root';" \
+   && mysql --user="root" --execute="FLUSH PRIVILEGES;" \
    && mysql --user="root" --execute="\q;"
 
 
