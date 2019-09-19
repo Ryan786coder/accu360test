@@ -35,6 +35,8 @@ RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
 RUN su erpnextuser -c bench init erpnext 
 #RUN cd erpnext 
+RUN mkdir -p /erpnext
+RUN chown -R erpnextuser /erpnext
 RUN su erpnextuser -c bench new-site example.com
 RUN su erpnextuser -c bench start
 
