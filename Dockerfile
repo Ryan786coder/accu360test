@@ -33,12 +33,10 @@ RUN su - erpnextuser
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
-RUN su erpnextuser -c bench init erpnext ;exit 0
-#RUN cd erpnext 
-#RUN mkdir -p /erpnext
-#RUN chown -R erpnextuser /erpnext
-RUN su erpnextuser -c bench new-site example.com ;exit 0
-RUN su erpnextuser -c bench start ;exit 0
+RUN cd erpnext
+RUN bench init erpnext 
+RUN bench new-site example.com 
+RUN bench start 
 
 EXPOSE 8000-8005 9000-9005 3306-3307
    
