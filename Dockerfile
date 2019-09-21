@@ -15,16 +15,15 @@ RUN apt-get install -y mariadb-server mariadb-client
 COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN service mysql start \
-   && mysql  --execute="CREATE DATABASE erpnext;" \
-   && mysql  --execute="CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';" \
-   && mysql  --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;" \
-   && mysql  --execute="FLUSH PRIVILEGES;" \
-   && mysql  --execute="\q;"
+   && mysql --user="root" --execute="CREATE DATABASE erpnext;" \
+   && mysql --user="root" --execute="CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY '1234';" \
+   && mysql --user="root" --execute="GRANT ALL ON erpnext.* TO 'erpnextuser'@'localhost' IDENTIFIED BY '1234' WITH GRANT OPTION;" \
+   && mysql --user="root" --execute="FLUSH PRIVILEGES;" \
+   && mysql --user="root" --execute="\q;"
    
-   
-
-  
-   
+RUN adduser general 
+RUN usermod -aG sudo general
+      
 RUN useradd -m -s /bin/bash erpnextuser -p 1234
 #RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
@@ -35,9 +34,9 @@ RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
 RUN bench init erpnext  \
- && cd erpnext --user erpnextuser
-RUN bench new-site example.com --user erpnextuser
-RUN bench start --user erpnextuser
+ && cd erpnext --user general
+RUN bench new-site example.com --user general
+RUN bench start --user general
 
 EXPOSE 8000-8005 9000-9005 3306-3307
    
