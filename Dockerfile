@@ -1,4 +1,4 @@
-FROM debian:9.6-slim
+FROM ubuntu:18.04
 
 RUN apt-get -y update
 RUN apt -y install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
