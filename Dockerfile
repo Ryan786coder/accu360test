@@ -3,6 +3,7 @@ FROM debian:9.6-slim
 RUN apt-get -y update
 RUN apt -y install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
+RUN python install.py --user erpnextuser
 RUN apt-get -y install gcc g++ make
 RUN apt-get install -y nodejs redis-server
 RUN npm install -g yarn
@@ -29,7 +30,6 @@ RUN useradd -m -s /bin/bash erpnextuser -p 1234
 RUN usermod -aG sudo erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
-RUN python install.py --user erpnextuser
 RUN su - erpnextuser 
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
