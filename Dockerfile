@@ -22,7 +22,7 @@ RUN service mysql start \
    && mysql --user="root" --execute="\q;"
    
 RUN adduser general 
-RUN usermod -aG sudo general
+
       
 RUN useradd -m -s /bin/bash erpnextuser -p 1234
 #RUN passwd erpnextuser
@@ -33,8 +33,9 @@ RUN su - erpnextuser
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
-RUN bench init erpnext  \
- && cd erpnext --user general
+RUN su - general 
+RUN bench init erpnext --user general \
+ && cd erpnext 
 RUN bench new-site example.com --user general
 RUN bench start --user general
 
