@@ -1,14 +1,13 @@
 FROM debian:9.6-slim
 
 RUN apt-get -y update
-RUN apt -y install python-minimal
-RUN python install.py --user erpnextuser
 RUN apt -y install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y install gcc g++ make
 RUN apt-get install -y nodejs redis-server
 RUN npm install -g yarn
 RUN apt install -y nginx
+COPY ./install.py /opt/erpnext/bench-repo/playbooks/install.py
 
 RUN apt-get install -y mariadb-server mariadb-client
 
