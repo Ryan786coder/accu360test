@@ -81,8 +81,8 @@ def install_bench(args):
 		else:
 			args.user = getpass.getuser()
 
-	if args.user == 'root':
-		raise Exception('Please run this script as a non-root user with sudo privileges, but without using sudo or pass --user=USER')
+	#if args.user == 'root':
+		#raise Exception('Please run this script as a non-root user with sudo privileges, but without using sudo or pass --user=USER')
 
 	# Python executable
 	dist_name, dist_version = get_distribution_info()
