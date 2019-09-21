@@ -1,8 +1,8 @@
 FROM debian:9.6-slim
 
 RUN apt-get -y update
-RUN python install.py --user erpnextuser
 RUN apt -y install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
+RUN python install.py --user erpnextuser
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get -y install gcc g++ make
 RUN apt-get install -y nodejs redis-server
