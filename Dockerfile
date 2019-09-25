@@ -31,6 +31,7 @@ RUN usermod -aG sudo erpnextuser
 RUN python install.py --develop --user erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
+RUN chown -R erpnextuser:erpnextuser *
 RUN su - erpnextuser 
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
