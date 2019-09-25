@@ -8,7 +8,7 @@ RUN apt-get -y install gcc g++ make
 RUN apt-get install -y nodejs redis-server
 RUN npm install -g yarn
 RUN apt install -y nginx
-COPY ./install.py /opt/erpnext/bench-repo/playbooks/install.py
+
 
 RUN apt-get install -y mariadb-server mariadb-client
 
@@ -24,7 +24,7 @@ RUN service mysql start \
    
 
 
-RUN wget https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+COPY ./install.py /opt/erpnext/bench-repo/playbooks/install.py
 RUN useradd -m -s /bin/bash erpnextuser -p 1234
 #RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
