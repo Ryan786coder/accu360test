@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -y update
 RUN apt -y install libffi-dev python-pip python-dev libssl-dev wkhtmltopdf curl git 
 RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash -
