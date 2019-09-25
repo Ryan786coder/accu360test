@@ -24,12 +24,11 @@ RUN service mysql start \
    
 
 
-COPY ./install.py /opt/erpnext/bench-repo/playbooks/install.py
+COPY ./install.py 
 RUN useradd -m -s /bin/bash erpnextuser -p 1234
 #RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
 RUN python install.py --develop
-RUN python install.py --develop --user erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
 RUN su - erpnextuser 
