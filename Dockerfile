@@ -24,7 +24,7 @@ RUN service mysql start \
    
 
 
-COPY ./install.py 
+COPY ./install.py .
 RUN useradd -m -s /bin/bash erpnextuser -p 1234
 #RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
