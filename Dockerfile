@@ -24,7 +24,7 @@ RUN service mysql start \
    
 
 
-RUN RUN wget https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+RUN wget https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
 RUN useradd -m -s /bin/bash erpnextuser -p 1234
 #RUN passwd erpnextuser
 RUN usermod -aG sudo erpnextuser
