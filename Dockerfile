@@ -30,7 +30,7 @@ RUN useradd -m -s /bin/bash erpnextuser -p 1234
 RUN usermod -aG sudo erpnextuser
 RUN mkdir -p /opt/erpnext
 RUN chown -R erpnextuser /opt/erpnext/
-RUN su - erpnextuser 
+#RUN su - erpnextuser 
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
