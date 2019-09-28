@@ -25,21 +25,23 @@ RUN service mysql start \
 
 
 
-RUN useradd -m -s /bin/bash erpnextuser -p 1234
+#RUN useradd -m -s /bin/bash erpnextuser -p 1234
+RUN useradd frappe 
 #RUN passwd erpnextuser
-RUN usermod -aG sudo erpnextuser
+RUN usermod -aG sudo frappe
+#RUN usermod -aG sudo erpnextuser
 RUN mkdir -p /opt/erpnext
 #RUN chown -R erpnextuser /opt/erpnext/
 RUN chown -R 777 /opt/erpnext
-RUN su - erpnextuser 
+#RUN su - erpnextuser 
 RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
 RUN cd /bench-repo
-RUN bench init erpnext  --mariadb-root-username erpnextuser --mariadb-root-password erpnextuser --verbose \
+RUN bench init erpnext --username frappe  \
   && cd erpnext
-RUN bench new-site example.com --mariadb-root-username erpnextuser --mariadb-root-password erpnextuser --verbose
-RUN bench start --mariadb-root-username erpnextuser --mariadb-root-password erpnextuser --verbose
+RUN bench new-site example.com --username frappe
+RUN bench start --username frappe
 
 EXPOSE 8000-8005 9000-9005 3306-3307
    
