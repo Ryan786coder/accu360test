@@ -38,8 +38,8 @@ RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
 RUN cd /bench-repo
-RUN bench init erpnext --username frappe  \
-  && cd erpnext
+RUN bench init erpnext --username frappe  
+RUN cd erpnext
 RUN bench new-site example.com --username frappe
 RUN bench start --username frappe
 
