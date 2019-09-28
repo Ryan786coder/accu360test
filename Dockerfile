@@ -36,10 +36,10 @@ RUN cd /opt/erpnext
 RUN git clone https://github.com/frappe/bench bench-repo
 RUN pip install -e bench-repo
 RUN cd /bench-repo
-RUN bench init erpnext  \
+RUN bench init erpnext  --mariadb-root-username erpnextuser --mariadb-root-password erpnextuser --verbose \
   && cd erpnext
-RUN bench new-site example.com 
-RUN bench start 
+RUN bench new-site example.com --mariadb-root-username erpnextuser --mariadb-root-password erpnextuser --verbose
+RUN bench start --mariadb-root-username erpnextuser --mariadb-root-password erpnextuser --verbose
 
 EXPOSE 8000-8005 9000-9005 3306-3307
    
